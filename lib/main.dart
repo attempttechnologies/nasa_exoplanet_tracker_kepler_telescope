@@ -29,8 +29,7 @@ class MyApp extends StatelessWidget {
   final String _returnQueryFormat = "&format=json";
 
   TextStyle _textStyle() => const TextStyle(
-        fontSize: 15.0,
-        fontWeight: FontWeight.bold,
+        fontSize: 12.0,
       );
 
   Future<List<Widget>> get() async {
@@ -41,20 +40,44 @@ class MyApp extends StatelessWidget {
     for (var exoplanet in decodedData) {
       exoplanets.add(
         Container(
+          color: const Color(0xff15418c),
           margin: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("KOI Name: ${exoplanet['kepoi_name']}", style: _textStyle()),
-              Text("Planet ID: ${exoplanet['kepid']}", style: _textStyle()),
-              Text("Planet Name: ${exoplanet['kepler_name']}",
-                  style: _textStyle()),
-              Text("Disposition: ${exoplanet['koi_disposition']}",
-                  style: _textStyle()),
-              Text("Disposition Score: ${exoplanet['koi_score']}",
-                  style: _textStyle()),
-              Text("koi_fpflag_nt: ${exoplanet['koi_fpflag_nt']}",
-                  style: _textStyle()),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text("KOI Name: ${exoplanet['kepoi_name']}",
+                      style: _textStyle()),
+                  Text(
+                    "Planet ID: ${exoplanet['kepid']}",
+                    style: _textStyle(),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text("Planet Name: ${exoplanet['kepler_name']}",
+                      style: _textStyle()),
+                  Text("Disposition: ${exoplanet['koi_disposition']}",
+                      style: _textStyle()),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text("Disposition Score: ${exoplanet['koi_score']}",
+                      style: _textStyle()),
+                  Text("koi_fpflag_nt: ${exoplanet['koi_fpflag_nt']}",
+                      style: _textStyle()),
+                ],
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
               Text("koi_fpflag_co: ${exoplanet['koi_fpflag_co']}",
                   style: _textStyle()),
               Text("koi_fpflag_ec: ${exoplanet['koi_fpflag_ec']}",
@@ -153,12 +176,28 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               return Column(
                 children: [
-                  Image.network(
-                    "images/nasa-logo-web-rgb.png",
-                    width: 250.0,
+                  Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage("images/pexels-pixabay-2166.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Image.network(
+                          "images/nasa-logo-web-rgb.png",
+                          width: 250.0,
+                        ),
+                        const Text("Kepler Satellite's Objects of Interest"),
+                        const Text("Exoplanets Data"),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                      ],
+                    ),
                   ),
-                  const Text("Kepler Satellite's Objects of Interest"),
-                  const Text("Exoplanets Data"),
                   Expanded(
                     child: ListView(
                       children: snapshot.data,
