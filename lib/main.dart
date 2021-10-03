@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:nasa_exoplanet_tracker/app.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
